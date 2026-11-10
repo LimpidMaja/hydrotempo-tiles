@@ -1,0 +1,56 @@
+name: Pages
+
+# Publishes the tiles on this repository's Pages site. Its own workflow, not the branch build: the branch build's
+# deploy stops after 10 minutes of syncing files (the first publish, 10 November 2026).
+# The site's repository writes this file (scripts/assets/publish-tiles.sh) with every publish.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      artifact: ${{ steps.upload.outputs.artifact_id }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - id: upload
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: .
+          retention-days: 1
+
+  # The Pages API directly, not actions/deploy-pages: that action waits at most 10 minutes and then cancels the
+  # deployment, and the first sync of 380 MB of tiles takes longer. Here the wait is up to 50 minutes.
+  deploy:
+    needs: upload
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    environment:
+      name: github-pages
+      url: https://limpidmaja.github.io/hydrotempo-tiles/
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT: ${{ needs.upload.outputs.artifact }}
+        run: |
+          oidc=$(curl -fsS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r .value)
+          id=$(gh api -X POST "repos/$GITHUB_REPOSITORY/pages/deployments" -F artifact_id="$ARTIFACT" -f pages_build_version="$GITHUB_SHA" -f oidc_token="$oidc" --jq .id)
+          for i in $(seq 1 300); do
+            s=$(gh api "repos/$GITHUB_REPOSITORY/pages/deployments/$id" --jq .status)
+            echo "$(date -u +%H:%M:%S) $s"
+            case "$s" in succeed) exit 0 ;; deployment_failed|deployment_lost|deployment_cancelled|deployment_content_failed|deployment_perms_error) exit 1 ;; esac
+            sleep 10
+          done
+          exit 1

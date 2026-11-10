@@ -1,0 +1,195 @@
+{
+ "built_at": "2026-11-10T10:50:57.483Z",
+ "tileSize": 512,
+ "landOnly": "earth level 7 and terrain exist only where the coast index lists the tile (or at level 7 its level-6 parent) as crossing a coast or wholly land",
+ "scheme": "equirectangular, level z has 2^(z+1) x 2^z tiles, row 0 at the north; files <z>/<x>_<y>",
+ "layers": {
+  "earth": {
+   "source": "nasa-blue-marble",
+   "credit": "NASA Earth Observatory, Blue Marble Next Generation by Reto Stöckli",
+   "license": "Public domain",
+   "script": "scripts/assets/tile-budget.mjs, scripts/assets/earth-tiles-deep.mjs, scripts/assets/earth_tiles_fine.py (level 7, land only)",
+   "index": null,
+   "levels": {
+    "0": {
+     "files": 2,
+     "bytes": 57822,
+     "sha256": "c8974af71d6ae108f5ea8b8ec87147b00a568e47a97904f94252a129ebe5ec96"
+    },
+    "1": {
+     "files": 8,
+     "bytes": 178858,
+     "sha256": "44cf7bcc7f654348379fab8965f985865406f839fbd3266844e81a8e2f6b8484"
+    },
+    "2": {
+     "files": 32,
+     "bytes": 590998,
+     "sha256": "af736edc0c54e56a82bdd233c761a7342c78ea26334f08a87717f6fb978277d2"
+    },
+    "3": {
+     "files": 128,
+     "bytes": 2050186,
+     "sha256": "51fbde69feff3a07daf31a34644c23ad37ee5932304570a7c065e7a6b1acc236"
+    },
+    "4": {
+     "files": 512,
+     "bytes": 6571734,
+     "sha256": "720cb9a43fbf444e71b5c8863a510311b729578b902529fdc08c28771e38c396"
+    },
+    "5": {
+     "files": 2048,
+     "bytes": 21052950,
+     "sha256": "16b1c0992f087e870e608a61f1154319bab85cef2c1a4c2a3c51067da196c75d"
+    },
+    "6": {
+     "files": 8192,
+     "bytes": 66097962,
+     "sha256": "8f67a6382fff5a5c932522b9a3338fb3f207c193027a9767c467afd0293fbc46"
+    },
+    "7": {
+     "files": 385,
+     "bytes": 153869888,
+     "sha256": "e5b4ebd0d9c12574cfd1f48e09555e1b1e3fb220f33b8724b361858ad74a6668"
+    }
+   }
+  },
+  "coast": {
+   "source": "osm-land-polygons",
+   "credit": "© OpenStreetMap contributors",
+   "license": "ODbL 1.0",
+   "script": "scripts/assets/coast_tiles.py",
+   "index": "index.json",
+   "levels": {
+    "0": {
+     "files": 2,
+     "bytes": 40914,
+     "sha256": "9105c56a9a3f34f7c5023da0347b295d64ba2d0d23ccd1477a1450325aa57b0a"
+    },
+    "1": {
+     "files": 8,
+     "bytes": 104956,
+     "sha256": "7fe2399ac9bd4975eab94efa0e96bb06d3589306dfb0923815e23c29fc43ca93"
+    },
+    "2": {
+     "files": 32,
+     "bytes": 264067,
+     "sha256": "baa6bdfd3da6f784e43bf03a558a654751676dc5399730b0846829e297c5f3df"
+    },
+    "3": {
+     "files": 116,
+     "bytes": 666039,
+     "sha256": "352b2d121b2ad6cd1c25cdf0ed84c53b36b2777c40b6a120719f13e45166469f"
+    },
+    "4": {
+     "files": 311,
+     "bytes": 1603170,
+     "sha256": "dbfb6f1c8b607dceaee0ccdc3402a16a1992dccc442a330eb33c6005cf37d81a"
+    },
+    "5": {
+     "files": 773,
+     "bytes": 3425828,
+     "sha256": "240c4fd6d052307d2f09e08d30250cc3470fc57ffe4b5fb990f66eb44a1f617e"
+    },
+    "6": {
+     "files": 1842,
+     "bytes": 6373929,
+     "sha256": "8195e4beb7298e220cbd0d181b9a4b1961dafddac9e1fb14d029d4c8cf60a994"
+    },
+    "7": {
+     "files": 327,
+     "bytes": 1210604,
+     "sha256": "d6bf25c348ca49579e60b090153fe9b3858497a76b93a64ce2a0ee08d142fff7"
+    }
+   }
+  },
+  "terrain": {
+   "source": "gebco-2026",
+   "credit": "GEBCO Compilation Group (2026) GEBCO 2026 Grid (doi: 10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa)",
+   "license": "Public domain",
+   "script": "scripts/assets/terrain_tiles.py",
+   "encoding": "65 x 65 lossless WebP, metres = red * 256 + green, below sea level stored as 0; the globe raises them x2 (src/lib/three/tilesource.ts)",
+   "index": null,
+   "levels": {
+    "0": {
+     "files": 2,
+     "bytes": 4492,
+     "sha256": "957b52ea2642562de8e5c7bd8d14cf2f89fe208c3b2066044e054ce0f8b1b204"
+    },
+    "1": {
+     "files": 8,
+     "bytes": 16186,
+     "sha256": "2671aaa91306db43eb326d87d78508578dfcc311d6195bfeb73f9decd88637c2"
+    },
+    "2": {
+     "files": 32,
+     "bytes": 58082,
+     "sha256": "2eac71267d6fa2a385733d83d1fb79c95d6a4cedd745c0490fcd2f1e91fd7f94"
+    },
+    "3": {
+     "files": 120,
+     "bytes": 204034,
+     "sha256": "83aff1c11f84ed659b52f090a10d865710d1ef8ce7f5500799908e5cd640b0c3"
+    },
+    "4": {
+     "files": 385,
+     "bytes": 723012,
+     "sha256": "18aa00e835166d89057d97d127fdd9cc21dcab2ce74def31cf39a71a8d3807da"
+    },
+    "5": {
+     "files": 32,
+     "bytes": 2580558,
+     "sha256": "d2f99ab801b1b0d73bfc2e78a2a7964ee9c06b447d91984dc5295b32e1db87b6"
+    },
+    "6": {
+     "files": 120,
+     "bytes": 9167612,
+     "sha256": "96e131566cbdab18b5c9de7c94d9111a130294e27aaf99db610eb6b664f87574"
+    },
+    "7": {
+     "files": 385,
+     "bytes": 32532238,
+     "sha256": "0c6f089f0356bf756e62a791f005b5e27b0a56aeaf2a69e74b14acfdcfba72d8"
+    }
+   }
+  },
+  "relief": {
+   "source": "gebco-2026",
+   "credit": "GEBCO Compilation Group (2026) GEBCO 2026 Grid (doi: 10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa)",
+   "license": "Public domain",
+   "script": "scripts/assets/relief_tiles.py",
+   "index": null,
+   "levels": {
+    "0": {
+     "files": 2,
+     "bytes": 92452,
+     "sha256": "d9b20ba53c598a9e4f7d38e35f22da84093cbe3c1a9271c86ade222579357bd6"
+    },
+    "1": {
+     "files": 8,
+     "bytes": 333494,
+     "sha256": "fe53527344ae3352624178073a4e1286bdc73dcf3519785258d2ff96e0645ffc"
+    },
+    "2": {
+     "files": 32,
+     "bytes": 1334616,
+     "sha256": "6a7beaba9209c3ff7a5ae9d2c2613a2e613284ae590760c85bee0e0316e199f1"
+    },
+    "3": {
+     "files": 128,
+     "bytes": 4895672,
+     "sha256": "0efb95920169b945c1418e2d72b538d3fa0a9e4a19f19beb9a48e9236a98bec2"
+    },
+    "4": {
+     "files": 512,
+     "bytes": 15854146,
+     "sha256": "380214c388c62803e4d3c054b7b1a5749d05042b1324e0a158cd261187ccc8c8"
+    },
+    "5": {
+     "files": 2048,
+     "bytes": 48104302,
+     "sha256": "073fee31231918ce569b7acd4684a5b16f02cdceaa8910c215e95e9af2223093"
+    }
+   }
+  }
+ }
+}
